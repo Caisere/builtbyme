@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common-components/header";
 import Footer from "@/components/common-components/footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={`${outfit.className} antialiased`}
@@ -36,5 +38,6 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
+    </ClerkProvider>
   );
 }

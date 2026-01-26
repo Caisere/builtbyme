@@ -1,6 +1,7 @@
 import { CompassIcon, HomeIcon, SparkleIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 
 const Logo = () => {
@@ -36,35 +37,35 @@ function Header () {
             </Link>
           </nav>
           <div className="flex items-center gap-3">
-            {!isSignedIn 
-              ? (
-                <>
-                  <Button variant='ghost' asChild className="transtion-colors duration-300">
-                    <Link href="/login">
-                      <span>Sign In</span>
-                    </Link>
-                  </Button>
-
-                  <Button asChild className="transtion-colors duration-300">
-                    <Link href="/signup">
-                      <span>Sign Up</span>
-                    </Link>
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button asChild className="transtion-colors duration-300">
-                    <Link href="/submit">
-                      <span><SparkleIcon className="size-5" /></span>
-                      <span>Submit Project</span>
-                    </Link>
-                  </Button>
-                  {/* clerk user */}
-                  <Button variant='ghost' className="rounded-full transtion-colors duration-300 border h-8 w-8">
-                    <UserIcon className="size-4" />
-                  </Button>
-                </>
-            )}
+            <SignedOut>
+              <SignInButton >
+                <Button asChild variant='ghost'>
+                  <Link href="/login">
+                    <span>Sign In</span>
+                  </Link>
+                </Button>
+              </SignInButton>
+              <SignUpButton>
+              <Button asChild className="transtion-colors duration-300">
+                <Link href="/signup">
+                  <span>Sign Up</span>
+                </Link>
+              </Button>
+              </SignUpButton>             
+            </SignedOut>
+            <SignedIn>
+              <SignInButton>
+                <Link href="/submit">
+                  <span><SparkleIcon className="size-5" /></span>
+                  <span>Submit Project</span>
+                </Link>
+              </SignInButton>
+              {/* clerk user */}
+              <Button variant='ghost' className="rounded-full transtion-colors duration-300 border h-8 w-8">
+                <UserButton />
+                {/* <UserIcon className="size-4" /> */}
+              </Button>
+            </SignedIn>
           </div>
         </div>
       </div>
@@ -72,4 +73,31 @@ function Header () {
   )
 }
 
+
+
+//  <SignedOut>
+//               <SignInButton />
+//               <SignUpButton>
+//                 <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+//                   Sign Up
+//                 </button>
+//               </SignUpButton>
+//             </SignedOut>
+//             <SignedIn>
+
+//             </SignedIn>
+
 export default Header;
+
+
+              // <Button variant='ghost' asChild className="transtion-colors duration-300">
+              //   <Link href="/login">
+              //     <span>Sign In</span>
+              //   </Link>
+              // </Button>
+
+              // <Button asChild className="transtion-colors duration-300">
+              //   <Link href="/signup">
+              //     <span>Sign Up</span>
+              //   </Link>
+              // </Button>
