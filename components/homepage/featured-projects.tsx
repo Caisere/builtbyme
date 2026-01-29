@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "../projects/project-card";
 import { getProjects } from "@/lib/projects/projects-select";
+import { Suspense } from "react";
 // import { featuredProjects } from "@/lib/data";
 
 
@@ -28,11 +29,13 @@ export default async function FeaturedProjects() {
           </Link>
         </Button>
       </div>
-      <div className="grid-wrapper">
-        {featuredProjects.map(project => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+      <Suspense fallback={<p>Loading...</p>}>
+        <div className="grid-wrapper">
+          {featuredProjects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </Suspense>
     </section>
   )
 }
