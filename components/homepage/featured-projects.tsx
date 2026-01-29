@@ -3,10 +3,14 @@ import SectionHeader from "../common-components/section-header";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "../projects/project-card";
-import { featuredProjects } from "@/lib/data";
+import { getProjects } from "@/lib/projects/projects-select";
+// import { featuredProjects } from "@/lib/data";
 
 
-export default function FeaturedProjects() {
+
+export default async function FeaturedProjects() {
+  const featuredProjects = await getProjects()
+
   return (
     <section className="wrapper py-20">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 w-full">

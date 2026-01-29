@@ -5,8 +5,11 @@ import { Badge } from "../ui/badge";
 import { ChevronDown, ChevronUp, StarIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { ProjectType } from "@/app/types";
+import { InferSelectModel } from "drizzle-orm";
+import { projects } from "@/db/schema";
 
+
+type ProjectType = InferSelectModel<typeof projects>
 
 export default function ProjectCard({project}:{project:ProjectType}) {
 
@@ -20,7 +23,7 @@ export default function ProjectCard({project}:{project:ProjectType}) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <CardTitle className="text-lg group-hover:text-primary transition-colors">{project.name}</CardTitle>
-                {project.isFeatured && 
+                {project.status && 
                   <Badge className="gap-1 bg-primary text-primary-foreground">
                     <StarIcon className="size-3 fill-current" />
                     <span>Featured</span>
@@ -33,7 +36,7 @@ export default function ProjectCard({project}:{project:ProjectType}) {
               <Button variant='ghost' size='icon-sm' className={cn("h-8 w-8 text-primary", hasVoted ?  'bg-primary/10 text-primary hover:bg-primary/20' : 'hover:bg-primary/20 hover:text-primary')}>
                 <ChevronUp className="size-4" /> 
               </Button>
-              <span className="text-sm font-semibold transition-colors text-foreground">{project.votes}</span>
+              <span className="text-sm font-semibold transition-colors text-foreground">{project.voteCount}</span>
               <Button variant='ghost' size='icon-sm' className={cn("h-8 w-8 text-primary", hasVoted ?  'hover:text-destructive' : 'opacity/50 cursor-not-allowed')}>
                 <ChevronDown className="size-4" />
               </Button>
@@ -41,7 +44,7 @@ export default function ProjectCard({project}:{project:ProjectType}) {
           </div>
         </CardHeader>
         <CardFooter>
-          {project.tags.map(tag => (
+          {project.tags?.map(tag => (
             <Badge variant='secondary' key={tag} className="mr-2 mb-2">{tag}</Badge>
           ))}
         </CardFooter>
