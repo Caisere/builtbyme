@@ -1,10 +1,13 @@
+// 'use cache'
+
 import { Calendar1Icon, RocketIcon } from "lucide-react";
 import SectionHeader from "../common-components/section-header";
 import ProjectCard from "../projects/project-card";
-import { recentlyLaunchedProjects } from "@/lib/data";
 import EmptyProject from "../common-components/empty-project";
+import { getRecentlyLaunchedProjects } from "@/lib/projects/projects-select";
 
-function RecentlyLaunchedProjects() {
+async function RecentlyLaunchedProjects() {
+  const recentlyLaunchedProjects = await getRecentlyLaunchedProjects()
   return (
     <section className="py-20">
       <div className="wrapper space-y-12">
