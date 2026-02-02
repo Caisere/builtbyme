@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import ProjectCard from "../projects/project-card";
 import { getProjects } from "@/lib/projects/projects-select";
 import { Suspense } from "react";
-// import { featuredProjects } from "@/lib/data";
+
 
 
 

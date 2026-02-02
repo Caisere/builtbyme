@@ -38,20 +38,16 @@ function Header () {
           </nav>
           <div className="flex items-center gap-3">
             <SignedOut>
-              <SignInButton >
-                <Button asChild variant='ghost'>
-                  <Link href="/login">
-                    <span>Sign In</span>
-                  </Link>
-                </Button>
-              </SignInButton>
-              <SignUpButton>
+              <Button asChild variant='ghost'>
+                <Link href="/login">
+                  <span>Sign In</span>
+                </Link>
+              </Button>
               <Button asChild className="transtion-colors duration-300">
                 <Link href="/signup">
                   <span>Sign Up</span>
                 </Link>
-              </Button>
-              </SignUpButton>             
+              </Button>            
             </SignedOut>
             <SignedIn>
               <SignInButton>

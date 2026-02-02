@@ -12,7 +12,6 @@ import { projects } from "@/db/schema";
 type ProjectType = InferSelectModel<typeof projects>
 
 export default function ProjectCard({project}:{project:ProjectType}) {
-
   const hasVoted = false
 
   return (
