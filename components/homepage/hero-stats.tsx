@@ -1,4 +1,5 @@
-import type { StatsType } from "./hero-section";
+import { StatsType } from "@/app/types";
+
 
 export default function HeroStats ({icon:Icon, value, label, hasBorder}:StatsType) {
   return (

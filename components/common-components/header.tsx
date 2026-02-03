@@ -1,7 +1,7 @@
 import { CompassIcon, HomeIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Suspense } from "react";
 
 
