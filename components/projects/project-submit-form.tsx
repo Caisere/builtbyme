@@ -118,7 +118,7 @@ function ProjectSubmitForm() {
         helperText="Comma-separated tags (e.g., AI, SaaS, Projectivity)"
       />
 
-      <Button type="submit" size="lg" className="w-full">
+      <Button type="submit" size="lg" className="w-full cursor-pointer">
         {isPending ? (
           <Loader2Icon className="size-4 animate-spin" />
         ) : (

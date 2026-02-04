@@ -53,7 +53,7 @@ function Header () {
             </Suspense>
             <Suspense fallback={<div>Loading...</div>}>
               <SignedIn>
-                <Link href="/submit">
+                <Link href="/submit" className="flex items-center gap-2">
                   <span><SparkleIcon className="size-5" /></span>
                   <span>Submit Project</span>
                 </Link>
