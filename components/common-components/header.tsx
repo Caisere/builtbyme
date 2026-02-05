@@ -1,5 +1,6 @@
 import { CompassIcon, HomeIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
+import {Link as TransitionLink} from "next-view-transitions";
 import { Button } from "../ui/button";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Suspense } from "react";
@@ -7,14 +8,14 @@ import { Suspense } from "react";
 
 const Logo = () => {
   return (
-    <Link href="/" className="flex items-center gap-2 group">
+    <TransitionLink href="/" className="flex items-center gap-2 group">
       <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
         <SparkleIcon className="size-4 text-primary-foreground" />
       </div>
       <span className="font-bold text-xl">
         Built<span className="text-primary">By</span>Me
       </span>
-    </Link>
+    </TransitionLink>
   )
 }
 
@@ -26,37 +27,37 @@ function Header () {
         <div className="flex items-center justify-between h-16">
           <Logo />
           <nav className="flex items-center gap-1">
-            <Link href="/" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hover:bg-muted/50">
+            <TransitionLink href="/" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hover:bg-muted/50">
               <HomeIcon className="size-4" />
               <span className="hidden sm:inline-block">Home</span>
-            </Link>
+            </TransitionLink>
 
-              <Link href="/explore" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hover:bg-muted/50">
-              <CompassIcon className="size-4" />
-              <span className="hidden sm:inline-block">Explore</span>
-            </Link>
+              <TransitionLink href="/explore" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hover:bg-muted/50">
+                <CompassIcon className="size-4" />
+                <span className="hidden sm:inline-block">Explore</span>
+            </TransitionLink>
           </nav>
           <div className="flex items-center gap-3">
             <Suspense fallback={<div>Loading...</div>}>
             <SignedOut>
               <Button asChild variant='ghost'>
-                <Link href="/login">
+                <TransitionLink href="/login">
                   <span>Sign In</span>
-                </Link>
+                </TransitionLink>
               </Button>
               <Button asChild className="transtion-colors duration-300">
-                <Link href="/signup">
+                <TransitionLink href="/signup">
                   <span>Sign Up</span>
-                </Link>
+                </TransitionLink>
               </Button>            
             </SignedOut>
             </Suspense>
             <Suspense fallback={<div>Loading...</div>}>
               <SignedIn>
-                <Link href="/submit" className="flex items-center gap-2">
+                <TransitionLink href="/submit" className="flex items-center gap-2">
                   <span><SparkleIcon className="size-5" /></span>
                   <span>Submit Project</span>
-                </Link>
+                </TransitionLink>
                 <UserButton  />
               </SignedIn>
             </Suspense>

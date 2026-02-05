@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/common-components/header";
 import Footer from "@/components/common-components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import {ViewTransitions} from "next-view-transitions";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,18 +27,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${outfit.className} antialiased`}
-      >
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
-      </body>
-    </html>
-    </ClerkProvider>
+    <ViewTransitions>
+      <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${outfit.className} antialiased`}
+        >
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </body>
+      </html>
+      </ClerkProvider>
+    </ViewTransitions>
   );
 }
