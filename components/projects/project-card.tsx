@@ -1,18 +1,16 @@
 import Link from "next/link";
-
 import { Card, CardDescription, CardHeader, CardTitle, CardFooter } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { ChevronDown, ChevronUp, StarIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import {  StarIcon } from "lucide-react";
 import { InferSelectModel } from "drizzle-orm";
 import { projects } from "@/db/schema";
+import { VoteButton } from "./vote-button";
 
 
 type ProjectType = InferSelectModel<typeof projects>
 
 export default function ProjectCard({project}:{project:ProjectType}) {
-  const hasVoted = false
+  const hasVoted = true
 
   return (
     <Link href={`/projects/${project.id}`}>
@@ -31,15 +29,9 @@ export default function ProjectCard({project}:{project:ProjectType}) {
               <CardDescription>{project.description}</CardDescription>
             </div>
             {/* voting button */}
-            <div className="flex flex-col items-center gap-1 shrink-0">
-              <Button variant='ghost' size='icon-sm' className={cn("h-8 w-8 text-primary", hasVoted ?  'bg-primary/10 text-primary hover:bg-primary/20' : 'hover:bg-primary/20 hover:text-primary')}>
-                <ChevronUp className="size-4" /> 
-              </Button>
-              <span className="text-sm font-semibold transition-colors text-foreground">{project.voteCount}</span>
-              <Button variant='ghost' size='icon-sm' className={cn("h-8 w-8 text-primary", hasVoted ?  'hover:text-destructive' : 'opacity/50 cursor-not-allowed')}>
-                <ChevronDown className="size-4" />
-              </Button>
-            </div>
+            <>
+              <VoteButton hasVoted={hasVoted} voteCount={project.voteCount} projectId={project.id}/>
+            </>
           </div>
         </CardHeader>
         <CardFooter>

@@ -5,6 +5,7 @@ import Header from "@/components/common-components/header";
 import Footer from "@/components/common-components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import {ViewTransitions} from "next-view-transitions";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <Toaster />
         </body>
       </html>
       </ClerkProvider>

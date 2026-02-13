@@ -14,7 +14,7 @@ export function ProjectSkeleton() {
 
         <div className="grid-wrapper">
           {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="border rounded-lg p-6 space-y-4">
+            <div key={index} className="border rounded-lg p-6 space-y-4 min-h-[180px]">
               <div className="flex items-center gap-4 mb-4">
                 <div className="flex-1">
                   <Skeleton className="h-6 w-3/4 mb-2" />
