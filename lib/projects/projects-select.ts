@@ -13,6 +13,7 @@ export async function getProjects() {
 }
 
 export async function getAllProjects() {
+  await new Promise((resolve) => setTimeout(resolve, 10000));
   const allProjects = await db.select().from(projects).where(eq(
     projects.status, 'approved'
   ))
