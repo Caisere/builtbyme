@@ -56,7 +56,7 @@ function FormField ({
       {helperText && (
         <p className="text-xs text-muted-foreground">{helperText}</p>
       )}
-      {error && <p className="text-sm text-destructive">{error.join(", ")}</p>}
+      {error && <p className="text-sm text-destructive">{error?.join(",")}</p>}
     </div>
   );
 };

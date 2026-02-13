@@ -1,7 +1,8 @@
 'use server'
 
+import { FormState } from "@/app/types";
 import { ProjectSchema } from "@/components/projects/product-validations";
-import { FormState } from "@/components/projects/project-submit-form";
+
 import { db } from "@/db";
 import { projects } from "@/db/schema";
 import { auth, currentUser } from "@clerk/nextjs/server";

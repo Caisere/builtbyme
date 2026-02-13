@@ -17,3 +17,9 @@ export type StatsType = {
   label: string;
   hasBorder?: boolean;
 }
+
+export interface FormState {
+  success: boolean;
+  errors?: Record<string, string[]> | undefined;
+  message: string;
+}

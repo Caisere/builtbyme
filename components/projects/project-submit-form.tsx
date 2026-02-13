@@ -6,17 +6,8 @@ import FormField  from "../form/form-field";
 import { useActionState } from "react";
 import { addProject } from "@/lib/projects/project-actions";
 import { cn } from "@/lib/utils";
+import { FormState } from "@/app/types";
 
-
-type Errors = {
-  name: string | string[]
-}
-
-export interface FormState {
-  success: boolean;
-  errors?: Record<string, string[]> | undefined;
-  message: string;
-}
 
 export const initialState: FormState = {
   success: false,
@@ -25,17 +16,12 @@ export const initialState: FormState = {
 };
 
 
-
 function ProjectSubmitForm() {
 
-  const [state, formAction, isPending] = useActionState(addProject, initialState)
+  const [state, formAction, isPending] = useActionState<FormState, FormData>(addProject, initialState)
 
   const {errors, message, success} = state
 
-  const getFieldErrors = (fieldName: string) => {
-    return errors?.[fieldName]
-  };
-  
 
   return (
     <form 
@@ -63,7 +49,7 @@ function ProjectSubmitForm() {
         placeholder="My Awesome Project"
         required
         onChange={() => {}}
-        error={getFieldErrors("name")}
+        error={errors?.name ?? []}
       />
       <FormField
         label="Slug"
@@ -73,7 +59,7 @@ function ProjectSubmitForm() {
         required
         onChange={() => {}}
         helperText="URL-friendly version of your project name"
-        error={getFieldErrors("slug")}
+        error={errors?.slug ?? []}
       />
 
       <FormField
@@ -83,7 +69,7 @@ function ProjectSubmitForm() {
         placeholder="A brief, catchy description"
         required
         onChange={() => {}}
-        error={getFieldErrors("tagline")}
+        error={errors?.tagline ?? []}
       />
 
       <FormField
@@ -93,7 +79,7 @@ function ProjectSubmitForm() {
         placeholder="Tell us more about your project..."
         required
         onChange={() => {}}
-        error={getFieldErrors("description")}
+        error={errors?.description ?? []}
         textarea
       />
 
@@ -104,7 +90,7 @@ function ProjectSubmitForm() {
         placeholder="https://yourproject.com"
         required
         onChange={() => {}}
-        error={getFieldErrors("websiteUrl")}
+        error={errors?.websiteUrl ?? []}
         helperText="Enter your project's website or landing page"
       />
       <FormField
@@ -114,7 +100,7 @@ function ProjectSubmitForm() {
         placeholder="AI, Projectivity, SaaS"
         required
         onChange={() => {}}
-        error={getFieldErrors("tags")}
+        error={errors?.tags ?? []}
         helperText="Comma-separated tags (e.g., AI, SaaS, Projectivity)"
       />
 
