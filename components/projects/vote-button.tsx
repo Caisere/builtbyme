@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { downvoteProjectAction, upvoteProjectAction } from "@/lib/projects/project-actions";
 import { toast } from "sonner";
+import { useOptimistic, useTransition } from "react";
 
 type VoteButtonProps = {
   hasVoted: boolean;
@@ -12,26 +13,44 @@ type VoteButtonProps = {
   projectId: number;
 }
 
-export function VoteButton({hasVoted, voteCount, projectId}: VoteButtonProps) {
-  
-  async function upvoteProject() {
-    const response = await upvoteProjectAction({ projectId });
-
-    if (!response.success) {
-      toast.error(response.message || "Failed to upvote the project. Please try again.");
+export function VoteButton({ hasVoted, voteCount, projectId }: VoteButtonProps) {
+  const [isPending, startTransition] = useTransition()
+  const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(
+    voteCount,
+    (currentVoteCount: number, change: unknown) => {
+      // Ensure 'change' is a number before calculation
+      const numericChange = typeof change === "number" ? change : 0;
+      return Math.max(0, currentVoteCount + numericChange);
     }
+  );
 
-    toast.success(response.message || "Project upvoted successfully!");
+  async function upvoteProject() {
+
+    startTransition(async () => {
+      setOptimisticVoteCount(1);
+      const response = await upvoteProjectAction({ projectId });
+  
+      if (!response.success) {
+        toast.error(response.message || "Failed to upvote the project. Please try again.");
+      }
+  
+      toast.success(response.message || "Project upvoted successfully!");
+    });
   }
 
   async function downvoteProject() {
-    const respose = await downvoteProjectAction({ projectId });
 
-    if (!respose.success) {
-      toast.error(respose.message || "Failed to downvote the project. Please try again.");
-    }
+    startTransition(async () => { 
+        setOptimisticVoteCount(-1);
+        const response = await downvoteProjectAction({ projectId });
+    
+        if (!response.success) {
+          toast.error(response.message || "Failed to downvote the project. Please try again.");
+        }
+    
+        toast.success(response.message || "Project downvoted successfully!");
+    })
 
-    toast.success(respose.message || "Project downvoted successfully!");
   }
   
   return (
@@ -45,6 +64,7 @@ export function VoteButton({hasVoted, voteCount, projectId}: VoteButtonProps) {
       <Button
         variant="ghost"
         size="icon-sm"
+        disabled={isPending}
         className={cn(
           "h-8 w-8 text-primary cursor-pointer",
           hasVoted
@@ -56,11 +76,12 @@ export function VoteButton({hasVoted, voteCount, projectId}: VoteButtonProps) {
         <ChevronUp className="size-4" />
       </Button>
       <span className="text-sm font-semibold transition-colors text-foreground">
-        {voteCount}
+        {optimisticVoteCount}
       </span>
       <Button
         variant="ghost"
         size="icon-sm"
+        disabled={isPending}
         className={cn(
           "h-8 w-8 text-primary",
           hasVoted
