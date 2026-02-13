@@ -24,11 +24,11 @@ export async function getRecentlyLaunchedProjects() {
   const allProjects = await getAllProjects()
 
   const oneWeekAgo = new Date()
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 14)
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 21)
 
   // filter out recently launched projects within the last week
   const recentProjects = allProjects.filter(project => project.createdAt && new Date(project.createdAt.toISOString()) >= oneWeekAgo);
 
-  console.log(recentProjects, oneWeekAgo)
+  // console.log(recentProjects, oneWeekAgo)
   return recentProjects;
 }

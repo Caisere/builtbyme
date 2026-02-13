@@ -14,9 +14,23 @@ export async function addProject(prev: FormState, formData: FormData){
 
     console.log(formData)
 
-
       // get user id 
-      const {userId} = await auth()
+      const {userId, orgId} = await auth()
+
+      if(!userId) {
+        return {
+          success: false,
+          message: 'You must be signed in to submit a product'
+        }
+      }
+
+      if(!orgId) {
+        return {
+          success: false,
+          message: 'You must belong to an organization to submit a product'
+        }
+      }
+
       const user = await currentUser()
       
       const emailAddress = user?.emailAddresses?.[0].emailAddress || 'Anonymous'
@@ -54,7 +68,7 @@ export async function addProject(prev: FormState, formData: FormData){
         description,
         websiteUrl,
         userId,
-        // organizationId,
+        organizationId: orgId,
         tags: tagsArray,
         submittedBy: emailAddress,
       })

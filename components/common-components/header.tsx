@@ -1,9 +1,9 @@
 import { CompassIcon, HomeIcon, SparkleIcon } from "lucide-react";
-import Link from "next/link";
 import {Link as TransitionLink} from "next-view-transitions";
 import { Button } from "../ui/button";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut} from "@clerk/nextjs";
 import { Suspense } from "react";
+import UserBtn from "./user-btn";
 
 
 const Logo = () => {
@@ -58,7 +58,7 @@ function Header () {
                   <span><SparkleIcon className="size-5" /></span>
                   <span>Submit Project</span>
                 </TransitionLink>
-                <UserButton  />
+                <UserBtn />
               </SignedIn>
             </Suspense>
           </div>
