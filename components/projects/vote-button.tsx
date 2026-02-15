@@ -18,7 +18,6 @@ export function VoteButton({ hasVoted, voteCount, projectId }: VoteButtonProps) 
   const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(
     voteCount,
     (currentVoteCount: number, change: unknown) => {
-      // Ensure 'change' is a number before calculation
       const numericChange = typeof change === "number" ? change : 0;
       return Math.max(0, currentVoteCount + numericChange);
     }

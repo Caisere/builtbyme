@@ -13,7 +13,6 @@ import { refresh, revalidatePath } from "next/cache";
 
 export async function addProject(prev: FormState, formData: FormData) {
   try {
-    console.log(formData);
 
     // get user id
     const { userId, orgId } = await auth();
@@ -78,7 +77,6 @@ export async function addProject(prev: FormState, formData: FormData) {
       };
     }
 
-    // Return a proper error response for any other errors
     return {
       success: false,
       message: "An unexpected error occurred. Please try again.",
