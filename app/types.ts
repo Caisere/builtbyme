@@ -1,3 +1,5 @@
+import { projects } from "@/db/schema";
+import { InferSelectModel } from "drizzle-orm";
 import { LucideIcon } from "lucide-react";
 
 export type ProjectType = {
@@ -23,3 +25,6 @@ export interface FormState {
   errors?: Record<string, string[]> | undefined;
   message: string;
 }
+
+
+export type Project = InferSelectModel<typeof projects>;

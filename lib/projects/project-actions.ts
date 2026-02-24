@@ -1,7 +1,7 @@
 "use server";
 
 import { FormState } from "@/app/types";
-import { ProjectSchema } from "@/components/projects/product-validations";
+import { ProjectSchema } from "@/components/projects/project-validations";
 
 import { db } from "@/db";
 import { projects } from "@/db/schema";

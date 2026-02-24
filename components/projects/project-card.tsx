@@ -2,14 +2,13 @@ import Link from "next/link";
 import { Card, CardDescription, CardHeader, CardTitle, CardFooter } from "../ui/card";
 import { Badge } from "../ui/badge";
 import {  StarIcon } from "lucide-react";
-import { InferSelectModel } from "drizzle-orm";
-import { projects } from "@/db/schema";
 import { VoteButton } from "./vote-button";
+import { Project } from "@/app/types";
 
 
-type ProjectType = InferSelectModel<typeof projects>
 
-export default function ProjectCard({project}:{project:ProjectType}) {
+
+export default function ProjectCard({project}:{project:Project}) {
   const hasVoted = true
 
   return (
