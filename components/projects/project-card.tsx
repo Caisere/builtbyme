@@ -13,7 +13,7 @@ export default function ProjectCard({project}:{project:ProjectType}) {
   const hasVoted = true
 
   return (
-    <Link href={`/projects/${project.id}`}>
+    <Link href={`/projects/${project.slug}`}>
       <Card className="group card-hover hover:bg-primary-foreground/10 border-solid border-gray-400 max-h-[200px]">
         <CardHeader className="flex-1">
           <div className="flex items-start gap-4">

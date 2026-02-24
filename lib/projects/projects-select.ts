@@ -13,7 +13,7 @@ export async function getProjects() {
 }
 
 export async function getAllProjects() {
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+  // await new Promise((resolve) => setTimeout(resolve, 10000));
   const allProjects = await db.select().from(projects).where(eq(
     projects.status, 'approved'
   ))
@@ -32,4 +32,9 @@ export async function getRecentlyLaunchedProjects() {
 
   // console.log(recentProjects, oneWeekAgo)
   return recentProjects;
+}
+
+export async function getProjectBySlug(slug: string) {
+  const project = await db.select().from(projects).where(eq(projects.slug, slug))
+  return project?.[0] ?? null
 }

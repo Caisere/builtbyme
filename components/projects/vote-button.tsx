@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useOptimistic, useTransition } from "react";
 
 type VoteButtonProps = {
-  hasVoted: boolean;
+  hasVoted?: boolean;
   voteCount: number;
   projectId: number;
 }
